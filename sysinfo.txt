@@ -1,0 +1,5 @@
+sysinfo () {
+zenity --list --title="SYS INFO" --column="specifications" --column="values" "RAM" "`free -m | awk 'NR==2{printf"%s/%sGB(%.2f%%)\n",$3,$2,$3*100/$2}'`" "IP ADDRESS" "`hostname -I | awk '{print $1}'`" "SYSYEM STORAGE" "`df -h | awk '$NF=="/"{printf"%d/%dGB (%s)\n",$3,$2,$5}'`" "KERNEL VERSION" "`uname -r`" "MAC" "`ip li | grep ether | awk '{print $2}'`" "PROCESSOR NAME" "`cat /proc/cpuinfo | grep 'model name' |uniq`" "ARCHITECTURE" "`dpkg --print-architecture`
+"  "FREQUENCY" "`lscpu | grep MHz`"
+}
+sysinfo
